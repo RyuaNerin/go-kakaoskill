@@ -17,8 +17,8 @@ $ go get -v "github.com/RyuaNerin/go-kakaoskill"
 
 2. 다음과 같이 import 하여 사용할 수 있습니다.
 ```go
-import "github.com/RyuaNerin/go-kakaoskill/v2" // go modules 사용 (GO111MODULE=on or $GOPATH 밖)
-import "github.com/RyuaNerin/go-kakaoskill" // go modules 사용 안함
+import skill "github.com/RyuaNerin/go-kakaoskill/v2" // go modules 사용 (GO111MODULE=on or $GOPATH 밖)
+import skill "github.com/RyuaNerin/go-kakaoskill" // go modules 사용 안함
 ```
 
 ## Quick start
