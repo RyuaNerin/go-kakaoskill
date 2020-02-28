@@ -32,13 +32,17 @@ package main
 import (
 	"net/http"
 
-	skill "github.com/RyuaNerin/go-kakaoskill"
+	skill "github.com/RyuaNerin/go-kakaoskill/v2"
 )
 
 func main() {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/simple1", skill.F(simpleFunc))
 	mux.Handle("/simple2", skill.H(new(simpleHandler)))
+
+	mh := skill.NewMuxHelper(mux, "")
+	mh.F("/simple3", simpleFunc)
+	mh.H("/simple4", new(simpleHandler))
 
 	server := http.Server{
 		Handler: mux,
@@ -111,13 +115,17 @@ $ go run example.go
         import (
             "net/http"
 
-            skill "github.com/RyuaNerin/go-kakaoskill"
+            skill "github.com/RyuaNerin/go-kakaoskill/v2"
         )
 
         func main() {
             mux := http.NewServeMux()
             mux.HandleFunc("/simple1", skill.FP("X-Real-IP", simpleFunc))
             mux.Handle("/simple2", skill.HP("X-Real-IP", new(simpleHandler)))
+
+            mh := skill.NewMuxHelper(mux, "X-Real-IP")
+            mh.F("/simple3", simpleFunc)
+            mh.H("/simple4", new(simpleHandler))
 
             server := http.Server{
                 Handler: mux,

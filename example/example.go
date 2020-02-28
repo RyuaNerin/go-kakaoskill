@@ -12,6 +12,10 @@ func main() {
 	mux.HandleFunc("/simple1", skill.F(simpleFunc))
 	mux.Handle("/simple2", skill.H(new(simpleHandler)))
 
+	mh := skill.NewMuxHelper(mux, "")
+	mh.F("/simple3", simpleFunc)
+	mh.H("/simple4", new(simpleHandler))
+
 	server := http.Server{
 		Handler: mux,
 	}
