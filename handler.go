@@ -87,15 +87,10 @@ func handle(headerName string, handler Handler) http.HandlerFunc {
 		}
 
 		sctx := Context{
-			w:       w,
-			Reqeust: r,
-			Payload: &payload,
+			ResponseWriter: w,
+			Reqeust:        r,
+			Payload:        &payload,
 		}
 		handler.Handle(&sctx)
-
-		if !sctx.sent {
-			w.WriteHeader(http.StatusNoContent)
-			panic(ErrorNoResponse)
-		}
 	}
 }
