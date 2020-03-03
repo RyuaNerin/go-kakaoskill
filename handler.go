@@ -1,9 +1,10 @@
 package skill
 
 import (
-	"encoding/json"
 	"net"
 	"net/http"
+
+	jsoniter "github.com/json-iterator/go"
 )
 
 // 카카오톡 스킬 서버의 IP 입니다.
@@ -80,7 +81,7 @@ func handle(headerName string, handler Handler) http.HandlerFunc {
 		}
 
 		var payload SkillPayload
-		err := json.NewDecoder(r.Body).Decode(&payload)
+		err := jsoniter.NewDecoder(r.Body).Decode(&payload)
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
 			panic(err)
